@@ -13,7 +13,7 @@ export const SEO = {
   en: {
     metaTitle: 'I Know Your Age — Age Guessing Game from Your Memories',
     metaDesc:
-      'Answer questions about the trends, games and everyday things you remember, and this game guesses your exact age. Free, no sign-up, 12–45 questions.',
+      'I Know Your Age asks about the trends, games and everyday things you remember — then guesses your exact age. Free, no sign-up, 12–45 questions.',
     h1: 'I Know Your Age — the age guessing game',
     intro: [
       'Your memories give you away. The cartoons you watched, the games you played, the things everyone at school had — each one belongs to a moment in time, and together they point to the year you were born.',
@@ -32,7 +32,7 @@ export const SEO = {
     faqH: 'Frequently asked questions',
     faq: [
       {
-        q: 'How does the game guess my age?',
+        q: 'How does the game figure out my age?',
         a: 'Every question is tied to the years when something was popular and the ages of the people who knew it best. The game keeps a probability for every age from 6 to 85 and updates it with each answer, asking next about whatever would narrow it down the most, until it is confident enough to guess.',
       },
       {
