@@ -182,14 +182,16 @@ export const PAGES = {
         {
           h: 'The best way to reach us',
           body: [
-            'This site has no contact form and no support desk — the game collects nothing, so there is no account or result we could look up for you. If your game went wrong, just play again; nothing was saved anywhere.',
+            'This site has no contact form and no support desk — email is the way to reach us. The game collects nothing, so there is no account or result we could look up for you. If your game went wrong, just play again; nothing was saved anywhere.',
           ],
+          link: { href: 'mailto:contact@iknowyourage.games', label: 'contact@iknowyourage.games' },
         },
         {
           h: 'Report a bug or a wrong question',
           body: [
-            'If you spot a bug, a translation mistake, or a question you think is dated wrong, we want to know. A feedback inbox for this site is being set up and will be listed on this page.',
+            'If you spot a bug, a translation mistake, or a question you think is dated wrong, we want to know — send it to us by email:',
           ],
+          link: { href: 'mailto:contact@iknowyourage.games', label: 'contact@iknowyourage.games' },
           },
         {
           h: 'Privacy questions',
@@ -369,14 +371,16 @@ PAGES.ja = {
       {
         h: 'いちばん確実な連絡方法',
         body: [
-          'このサイトにはお問い合わせフォームもサポート窓口もありません——ゲームは何も集めないので、私たちがあなたの結果を調べることもできません。ゲームがうまくいかなかったら、もう一度遊んでみてください。どこにも何も保存されていません。',
+          'このサイトにはお問い合わせフォームもサポート窓口もありません——ご連絡はメールでお願いします。ゲームは何も集めないので、私たちがあなたの結果を調べることもできません。ゲームがうまくいかなかったら、もう一度遊んでみてください。どこにも何も保存されていません。',
         ],
+        link: { href: 'mailto:contact@iknowyourage.games', label: 'contact@iknowyourage.games' },
       },
       {
         h: '不具合や質問の間違いの報告',
         body: [
-          '不具合、翻訳の間違い、年代設定がおかしいと思う質問に気づいたら、ぜひ教えてください。このサイト専用のフィードバック窓口は現在準備中で、でき次第このページに掲載します。',
+          '不具合、翻訳の間違い、年代設定がおかしいと思う質問に気づいたら、ぜひ教えてください。メールはこちらへ：',
         ],
+        link: { href: 'mailto:contact@iknowyourage.games', label: 'contact@iknowyourage.games' },
       },
       {
         h: 'プライバシーについてのご質問',
@@ -553,14 +557,16 @@ PAGES.zh = {
       {
         h: '最有效的联系方式',
         body: [
-          '本站没有联系表单，也没有客服——游戏不收集任何东西，所以我们也没有任何账号或结果可以替你查询。如果一局玩得不对劲，再玩一局就好；任何东西都没有被保存下来。',
+          '本站没有联系表单，也没有客服——联系我们请用电子邮件。游戏不收集任何东西，所以我们也没有任何账号或结果可以替你查询。如果一局玩得不对劲，再玩一局就好；任何东西都没有被保存下来。',
         ],
+        link: { href: 'mailto:contact@iknowyourage.games', label: 'contact@iknowyourage.games' },
       },
       {
         h: '报告 bug 或题目错误',
         body: [
-          '如果你发现了 bug、翻译错误，或觉得某道题的年代标错了，我们很想知道。本站的反馈邮箱正在设置中，设好后会公布在这一页。',
+          '如果你发现了 bug、翻译错误，或觉得某道题的年代标错了，我们很想知道——请发邮件告诉我们：',
         ],
+        link: { href: 'mailto:contact@iknowyourage.games', label: 'contact@iknowyourage.games' },
       },
       {
         h: '隐私相关问题',
@@ -739,14 +745,16 @@ PAGES.es = {
       {
         h: 'La mejor manera de escribirnos',
         body: [
-          'Este sitio no tiene formulario de contacto ni servicio de atención —el juego no recoge nada, así que no hay ninguna cuenta ni resultado que podamos consultar por ti. Si una partida salió mal, juega otra; no se guardó nada en ninguna parte.',
+          'Este sitio no tiene formulario de contacto ni servicio de atención —la forma de contactarnos es el correo electrónico. El juego no recoge nada, así que no hay ninguna cuenta ni resultado que podamos consultar por ti. Si una partida salió mal, juega otra; no se guardó nada en ninguna parte.',
         ],
+        link: { href: 'mailto:contact@iknowyourage.games', label: 'contact@iknowyourage.games' },
       },
       {
         h: 'Informa de un error o de una pregunta incorrecta',
         body: [
-          'Si detectas un error, un fallo de traducción o una pregunta que crees que está mal fechada, queremos saberlo. Estamos preparando un correo de contacto para este sitio y lo publicaremos en esta página.',
+          'Si detectas un error, un fallo de traducción o una pregunta que crees que está mal fechada, queremos saberlo — escríbenos a:',
         ],
+        link: { href: 'mailto:contact@iknowyourage.games', label: 'contact@iknowyourage.games' },
       },
       {
         h: 'Preguntas sobre privacidad',
@@ -925,14 +933,16 @@ PAGES.pt = {
       {
         h: 'A melhor forma de falar conosco',
         body: [
-          'Este site não tem formulário de contato nem central de suporte — o jogo não coleta nada, então não há nenhuma conta ou resultado que possamos consultar por você. Se uma partida deu errado, jogue de novo; nada foi guardado em lugar nenhum.',
+          'Este site não tem formulário de contato nem central de suporte — a forma de falar conosco é por e-mail. O jogo não coleta nada, então não há nenhuma conta ou resultado que possamos consultar por você. Se uma partida deu errado, jogue de novo; nada foi guardado em lugar nenhum.',
         ],
+        link: { href: 'mailto:contact@iknowyourage.games', label: 'contact@iknowyourage.games' },
       },
       {
         h: 'Relate um bug ou uma pergunta errada',
         body: [
-          'Se você encontrar um bug, um erro de tradução ou uma pergunta que acha que está datada errado, queremos saber. Estamos preparando um e-mail de feedback para este site e ele será publicado nesta página.',
+          'Se você encontrar um bug, um erro de tradução ou uma pergunta que acha que está datada errado, queremos saber — escreva para:',
         ],
+        link: { href: 'mailto:contact@iknowyourage.games', label: 'contact@iknowyourage.games' },
       },
       {
         h: 'Dúvidas sobre privacidade',
