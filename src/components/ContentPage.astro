@@ -1,0 +1,137 @@
+---
+// ContentPage — one prerendered text page (how-it-works / about /
+// privacy-policy / terms / contact) in one language. Pure static HTML:
+// no game scripts, just the article, language switcher links and a footer
+// with the other content pages.
+import { PAGES, CONTENT_SLUGS, pagePath } from '../i18n/pages.mjs';
+import { LANGS, PATHS, HTML_LANG, OG_LOCALE, LANG_NAMES } from '../i18n/seo.mjs';
+
+const { lang, slug } = Astro.props;
+const page = PAGES[lang][slug];
+const site = 'https://iknowyourage.games';
+const canonical = site + pagePath(lang, slug);
+const gamePath = PATHS[lang];
+
+const PLAY = { en: 'Play the game', ja: 'ゲームで遊ぶ', zh: '开始玩游戏', es: 'Jugar ahora', pt: 'Jogar agora' };
+const SITE_NAME = { en: 'I Know Your Age', ja: 'あなたの年齢を当てます', zh: '我知道你几岁', es: 'Sé Tu Edad', pt: 'Sei Sua Idade' };
+---
+
+<!doctype html>
+<html lang={HTML_LANG[lang]}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light" />
+    <title>{page.metaTitle}</title>
+    <meta name="description" content={page.metaDesc} />
+    <link rel="canonical" href={canonical} />
+    {LANGS.map((l) => (
+      <link rel="alternate" hreflang={HTML_LANG[l]} href={site + pagePath(l, slug)} />
+    ))}
+    <link rel="alternate" hreflang="x-default" href={site + pagePath('en', slug)} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="I Know Your Age" />
+    <meta property="og:title" content={page.metaTitle} />
+    <meta property="og:description" content={page.metaDesc} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={OG_LOCALE[lang]} />
+    <meta property="og:image" content={site + '/icon.webp'} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={page.metaTitle} />
+    <meta name="twitter:description" content={page.metaDesc} />
+    <meta name="twitter:image" content={site + '/icon.webp'} />
+    <link rel="icon" href="/icon.webp" type="image/webp" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=M+PLUS+Rounded+1c:wght@700;800;900&family=Noto+Sans+SC:wght@400;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --ink: #221d19;
+        --bg: #f3ead9;
+        --display: 'Dela Gothic One', 'M PLUS Rounded 1c', 'Noto Sans SC', sans-serif;
+        --font: 'M PLUS Rounded 1c', 'Noto Sans SC', 'Hiragino Maru Gothic ProN', 'Hiragino Sans', sans-serif;
+      }
+      html[lang='zh-CN'] {
+        --display: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        --font: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0; min-height: 100vh; padding: 28px 14px 48px;
+        font-family: var(--font); font-weight: 700; line-height: 1.6;
+        color: var(--ink); background: var(--bg);
+      }
+      .content-wrap {
+        max-width: 640px; margin: 0 auto; padding: 26px 24px 28px;
+        background: #fffdf7; border: 2px solid var(--ink); border-radius: 14px;
+        box-shadow: 0 10px 22px -12px rgba(60, 40, 20, 0.45);
+      }
+      .content-top {
+        display: flex; align-items: center; justify-content: space-between; gap: 10px;
+        margin-bottom: 18px; flex-wrap: wrap;
+      }
+      .content-top a.brand {
+        font-family: var(--display); font-size: 17px; color: var(--ink); text-decoration: none;
+      }
+      html[lang='zh-CN'] .content-top a.brand { font-weight: 900; }
+      a.play-btn {
+        background: #ffc93c; border: 2px solid var(--ink); border-radius: 999px;
+        padding: 6px 16px; color: var(--ink); text-decoration: none; font-weight: 900; font-size: 14px;
+      }
+      h1 { font-family: var(--display); font-size: 26px; line-height: 1.35; margin: 0 0 14px; }
+      html[lang='zh-CN'] h1, html[lang='zh-CN'] h2 { font-weight: 900; }
+      h2 { font-family: var(--display); font-size: 19px; margin: 26px 0 8px; }
+      p, li { font-size: 15px; line-height: 1.75; }
+      ul { padding-left: 22px; margin: 8px 0; }
+      .content-foot { margin-top: 30px; border-top: 2px dashed rgba(34, 29, 25, 0.25); padding-top: 16px; }
+      .content-foot nav { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+      .content-foot nav a {
+        border: 2px solid var(--ink); border-radius: 999px; padding: 4px 13px;
+        text-decoration: none; color: var(--ink); font-weight: 800; font-size: 13.5px; background: #fff3c4;
+      }
+      .content-foot nav.langs a { background: #fffdf7; }
+    </style>
+  </head>
+  <body>
+    <main class="content-wrap">
+      <div class="content-top">
+        <a class="brand" href={gamePath}>{SITE_NAME[lang]}</a>
+        <a class="play-btn" href={gamePath}>{PLAY[lang]}</a>
+      </div>
+      <article>
+        <h1>{page.h1}</h1>
+        {page.sections.map((s) => (
+          <>
+            <h2>{s.h}</h2>
+            {(s.body || []).map((p) => <p>{p}</p>)}
+            {s.list && (
+              <ul>
+                {s.list.map((li) => <li>{li}</li>)}
+              </ul>
+            )}
+            {s.link && (
+              <p>
+                <a href={s.link.href}>{s.link.label}</a>
+              </p>
+            )}
+          </>
+        ))}
+      </article>
+      <footer class="content-foot">
+        <nav>
+          {CONTENT_SLUGS.map((s) => (
+            <a href={pagePath(lang, s)}>{PAGES[lang][s].nav}</a>
+          ))}
+        </nav>
+        <nav class="langs">
+          {LANGS.map((l) => (
+            <a href={pagePath(l, slug)} hreflang={HTML_LANG[l]}>{LANG_NAMES[l]}</a>
+          ))}
+        </nav>
+      </footer>
+    </main>
+  </body>
+</html>

@@ -49,7 +49,7 @@ export const SEO = {
       },
       {
         q: 'Is my age or my answers recorded?',
-        a: 'No. The game runs in your browser and nothing about who you are is recorded; ages and answers are only ever added up as anonymous counts.',
+        a: 'No. The game runs in your browser and nothing about who you are is recorded; your answers and the age it guesses are never sent to a server or stored anywhere.',
       },
     ],
     navH: 'Play in another language',
@@ -93,7 +93,7 @@ export const SEO = {
       },
       {
         q: '年齢や答えは記録されますか？',
-        a: '記録されません。ゲームはブラウザの中で動き、個人が特定される情報は保存されません。年齢や答えは匿名の集計として数えられるだけです。',
+        a: '記録されません。ゲームはブラウザの中で動き、個人が特定される情報は保存されません。あなたの答えや当てた年齢がサーバーに送られたり、保存されたりすることはありません。',
       },
     ],
     navH: 'ほかの言語で遊ぶ',
@@ -137,7 +137,7 @@ export const SEO = {
       },
       {
         q: '我的年龄和答案会被记录吗？',
-        a: '不会。游戏在浏览器本地运行，不记录你是谁；年龄和答案只会以匿名方式汇总计数。',
+        a: '不会。游戏在浏览器本地运行，不记录你是谁；你的答案和猜出的年龄不会被发送到服务器，也不会被保存在任何地方。',
       },
     ],
     navH: '用其他语言玩',
@@ -181,7 +181,7 @@ export const SEO = {
       },
       {
         q: '¿Se guarda mi edad o mis respuestas?',
-        a: 'No. El juego funciona en tu navegador y no registra quién eres; las edades y respuestas solo se suman como conteos anónimos.',
+        a: 'No. El juego funciona en tu navegador y no registra quién eres; tus respuestas y la edad que predice nunca se envían a un servidor ni se guardan en ningún sitio.',
       },
     ],
     navH: 'Jugar en otro idioma',
@@ -225,9 +225,134 @@ export const SEO = {
       },
       {
         q: 'Minha idade ou minhas respostas são registradas?',
-        a: 'Não. O jogo funciona no seu navegador e nada sobre quem você é fica registrado; idades e respostas só são somadas como contagens anônimas.',
+        a: 'Não. O jogo funciona no seu navegador e nada sobre quem você é fica registrado; suas respostas e a idade que ele adivinha nunca são enviadas a um servidor nem guardadas em lugar nenhum.',
       },
     ],
     navH: 'Jogar em outro idioma',
+  },
+};
+
+// Homepage thickening sections (memory categories, an example strata
+// reading, language-editions intro, footer note), one set per language.
+export const THICK = {
+  en: {
+    memH: 'What kinds of memories?',
+    memIntro:
+      'The 297 questions are not about one thing. They roam across everything a generation grows up with — if you lived through it, it can give you away:',
+    memCats: [
+      { name: 'Games and consoles', ex: 'the cartridge you blew on, the handheld everyone wanted, the first game you were hooked on' },
+      { name: 'Cartoons, TV and movies', ex: 'the shows that were on when you got home from school, and the ones you watched much later' },
+      { name: 'Music', ex: 'the songs that were everywhere one summer, and the ones your parents played' },
+      { name: 'School and everyday life', ex: 'what was in your pencil case, how the class computer sounded, what the phone at home looked like' },
+      { name: 'Phones, internet and apps', ex: 'dial-up screeches, first messengers, the first phone you ever owned' },
+      { name: 'Slang, memes and viral moments', ex: 'the words everyone said for exactly one year, and the videos the whole internet quoted' },
+    ],
+    exH: 'Reading a result: an example',
+    ex:
+      'Say your thickest layer turns out to be the 1990s, packed with fossils like a Game Boy, dial-up internet sounds and Saturday-morning cartoons, while the 2010s and 2020s layers stay almost empty. That pattern — deep knowledge of one decade, blanks on either side — is the classic signature of someone who grew up in the 90s. A layer from before your time can still fill up if you are a retro fan, which is why the game weighs every layer together instead of trusting just one.',
+    exList: [
+      'Thickest layer in the 1980s: expect fossils like arcade games and the first home consoles.',
+      'Thickest layer in the 2000s: flip phones, early social networks and CD-era music are the usual tells.',
+      'Thickest layer in the 2020s: short-video apps and the newest slang — a young player, or a very online one.',
+    ],
+    langIntro:
+      'The whole game — all 297 questions, the result screen and the share card — is fully translated. Pick your language; the memories being tested are the same, only the words change:',
+    footNote: 'I Know Your Age — a free guessing game that runs entirely in your browser.',
+  },
+  ja: {
+    memH: 'どんな思い出が出てくる？',
+    memIntro:
+      '297問は、ひとつの分野に偏っていません。ある世代が当たり前に触れてきたものなら何でも、あなたの年代を教えてくれます：',
+    memCats: [
+      { name: 'ゲームとゲーム機', ex: 'カセットに息を吹きかけたこと、みんなが欲しがった携帯機、初めてハマったゲーム' },
+      { name: 'アニメ・テレビ・映画', ex: '学校から帰るとやっていた番組と、ずっと後になって観た作品' },
+      { name: '音楽', ex: 'ある夏にどこでも流れていた曲と、親が聴いていた曲' },
+      { name: '学校と日常', ex: '筆箱の中身、学校のパソコンの音、家の電話の形' },
+      { name: '電話・インターネット・アプリ', ex: 'ダイヤルアップの接続音、最初のメッセンジャー、初めて持った携帯電話' },
+      { name: '流行語・ミーム・バズった出来事', ex: 'ちょうど1年だけみんなが言っていた言葉と、ネット中が真似した動画' },
+    ],
+    exH: '結果の読み方：たとえば',
+    ex:
+      'たとえば、いちばん厚い地層が1990年代で、ゲームボーイやダイヤルアップの接続音、土曜の朝のアニメといった「化石」がぎっしり詰まり、2010年代と2020年代の層はほぼ空白だったとします。「ある10年間だけ深く知っていて、前後が空白」というこの形は、その年代に育った人の典型的なサインです。生まれる前の地層も、レトロ好きなら厚くなることがあるので、ゲームはひとつの層だけを信じず、すべての層を合わせて判断します。',
+    exList: [
+      '1980年代の層が最も厚い場合：アーケードゲームや初期の家庭用ゲーム機が化石になりがちです。',
+      '2000年代の層が最も厚い場合：折りたたみ携帯、初期のSNS、CDの時代の音楽が目印です。',
+      '2020年代の層が最も厚い場合：ショート動画アプリと最新の流行語——若いプレイヤーか、ネットにどっぷり浸かった人です。',
+    ],
+    langIntro:
+      'ゲーム全体——297問すべて、結果画面もシェア画像も——が翻訳されています。言語を選んでください。問われる思い出は同じで、言葉だけが変わります：',
+    footNote: 'あなたの年齢を当てます——ブラウザの中だけで動く、無料の年齢当てゲームです。',
+  },
+  zh: {
+    memH: '都会问到哪些回忆？',
+    memIntro:
+      '297 道题不只问一类东西。一代人成长过程中接触过的一切，都可能“出卖”你的年代：',
+    memCats: [
+      { name: '游戏和游戏机', ex: '你吹过灰的卡带、人人都想要的掌机、你沉迷的第一款游戏' },
+      { name: '动画、电视和电影', ex: '放学回家时正在播的节目，以及你很久以后才补看的作品' },
+      { name: '音乐', ex: '某个夏天到处都在放的歌，和你父母那辈听的歌' },
+      { name: '校园和日常', ex: '文具盒里有什么、学校电脑开机是什么声音、家里的电话长什么样' },
+      { name: '电话、网络和应用', ex: '拨号上网的滋滋声、最早用的聊天软件、你拥有的第一部手机' },
+      { name: '流行语、梗和网络热点', ex: '只流行了整整一年的说法，和全网都在模仿的视频' },
+    ],
+    exH: '怎么看结果：举个例子',
+    ex:
+      '比如你最厚的一层是 1990 年代，里面塞满了 Game Boy、拨号上网的声音、周六早上的动画这些“化石”，而 2010 年代和 2020 年代的层几乎是空白的。这种“只有一个十年懂得特别深、前后都是空白”的形状，就是在那个年代长大的人的典型特征。你出生之前的地层也可能因为你是个怀旧爱好者而变厚，所以游戏不会只信一层，而是把所有层放在一起判断。',
+    exList: [
+      '最厚的是 1980 年代：化石多半是街机游戏和最早的家用游戏机。',
+      '最厚的是 2000 年代：翻盖手机、早期的社交网络和 CD 时代的音乐是常见线索。',
+      '最厚的是 2020 年代：短视频应用和最新的流行语——要么是年轻玩家，要么是重度网民。',
+    ],
+    langIntro:
+      '整个游戏——全部 297 道题、结果页和分享图——都有完整翻译。选你的语言吧；被问到的回忆是同一套，只是文字不同：',
+    footNote: '我知道你几岁——一款完全在浏览器里运行的免费猜年龄游戏。',
+  },
+  es: {
+    memH: '¿Qué tipo de recuerdos?',
+    memIntro:
+      'Las 297 preguntas no van de una sola cosa. Recorren todo aquello con lo que crece una generación; si lo viviste, puede delatarte:',
+    memCats: [
+      { name: 'Juegos y consolas', ex: 'el cartucho al que soplabas, la portátil que todo el mundo quería, el primer juego que te enganchó' },
+      { name: 'Dibujos, televisión y cine', ex: 'lo que echaban cuando llegabas del colegio y lo que viste mucho después' },
+      { name: 'Música', ex: 'las canciones que sonaban en todas partes un verano, y las que ponían tus padres' },
+      { name: 'Colegio y vida diaria', ex: 'lo que llevabas en el estuche, cómo sonaba el ordenador de clase, cómo era el teléfono de casa' },
+      { name: 'Teléfonos, internet y aplicaciones', ex: 'el chirrido del módem, los primeros programas de mensajería, el primer móvil que tuviste' },
+      { name: 'Expresiones, memes y momentos virales', ex: 'las palabras que todo el mundo dijo durante exactamente un año, y los vídeos que citaba todo internet' },
+    ],
+    exH: 'Cómo leer un resultado: un ejemplo',
+    ex:
+      'Imagina que tu capa más gruesa es la de los años 90, llena de fósiles como una Game Boy, el sonido de la conexión telefónica y los dibujos de los sábados por la mañana, mientras que las capas de los 2010 y los 2020 quedan casi vacías. Ese patrón —conocer a fondo una década y tener huecos a ambos lados— es la firma clásica de quien creció en los 90. Una capa anterior a tu época también puede llenarse si eres un fan de lo retro, por eso el juego valora todas las capas juntas en lugar de fiarse de una sola.',
+    exList: [
+      'Capa más gruesa en los años 80: espera fósiles como los salones recreativos y las primeras consolas domésticas.',
+      'Capa más gruesa en los 2000: los móviles de tapa, las primeras redes sociales y la música de la era del CD son las pistas habituales.',
+      'Capa más gruesa en los 2020: aplicaciones de vídeo corto y la jerga más nueva: un jugador joven, o uno muy en línea.',
+    ],
+    langIntro:
+      'El juego completo —las 297 preguntas, la pantalla de resultados y la tarjeta para compartir— está totalmente traducido. Elige tu idioma; los recuerdos sobre los que se pregunta son los mismos, solo cambian las palabras:',
+    footNote: 'Sé Tu Edad: un juego gratuito para adivinar tu edad que funciona por completo en tu navegador.',
+  },
+  pt: {
+    memH: 'Que tipos de lembranças?',
+    memIntro:
+      'As 297 perguntas não são sobre uma coisa só. Elas passeiam por tudo aquilo com que uma geração cresce — se você viveu, pode entregar você:',
+    memCats: [
+      { name: 'Jogos e consoles', ex: 'o cartucho que você assoprava, o portátil que todo mundo queria, o primeiro jogo que te viciou' },
+      { name: 'Desenhos, TV e filmes', ex: 'o que passava quando você chegava da escola, e o que você assistiu muito depois' },
+      { name: 'Música', ex: 'as músicas que tocavam em todo lugar em um verão, e as que seus pais ouviam' },
+      { name: 'Escola e dia a dia', ex: 'o que havia no seu estojo, o som do computador da escola, como era o telefone de casa' },
+      { name: 'Telefones, internet e aplicativos', ex: 'o barulho da internet discada, os primeiros mensageiros, o primeiro celular que você teve' },
+      { name: 'Gírias, memes e momentos virais', ex: 'as palavras que todo mundo falou por exatamente um ano, e os vídeos que a internet inteira citava' },
+    ],
+    exH: 'Lendo um resultado: um exemplo',
+    ex:
+      'Imagine que sua camada mais espessa é a dos anos 1990, cheia de fósseis como um Game Boy, o som da internet discada e os desenhos das manhãs de sábado, enquanto as camadas de 2010 e 2020 ficam quase vazias. Esse padrão — conhecer a fundo uma década, com brancos dos dois lados — é a assinatura clássica de quem cresceu nos anos 90. Uma camada de antes da sua época também pode se encher se você for fã de coisas retrô, e é por isso que o jogo pesa todas as camadas juntas em vez de confiar em uma só.',
+    exList: [
+      'Camada mais espessa nos anos 1980: espere fósseis como fliperamas e os primeiros consoles domésticos.',
+      'Camada mais espessa nos anos 2000: celulares de flip, as primeiras redes sociais e a música da era do CD são as pistas comuns.',
+      'Camada mais espessa nos anos 2020: aplicativos de vídeo curto e as gírias mais novas — um jogador jovem, ou um muito online.',
+    ],
+    langIntro:
+      'O jogo inteiro — todas as 297 perguntas, a tela de resultado e o cartão de compartilhamento — está totalmente traduzido. Escolha seu idioma; as lembranças perguntadas são as mesmas, só mudam as palavras:',
+    footNote: 'Sei Sua Idade — um jogo gratuito de adivinhar a idade que funciona inteiramente no seu navegador.',
   },
 };

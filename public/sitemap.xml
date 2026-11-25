@@ -45,4 +45,229 @@
     <xhtml:link rel="alternate" hreflang="pt" href="https://iknowyourage.games/pt/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://iknowyourage.games/"/>
   </url>
+  <url>
+    <loc>https://iknowyourage.games/how-it-works/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iknowyourage.games/how-it-works/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://iknowyourage.games/ja/how-it-works/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://iknowyourage.games/zh/how-it-works/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://iknowyourage.games/es/how-it-works/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://iknowyourage.games/pt/how-it-works/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iknowyourage.games/how-it-works/"/>
+  </url>
+  <url>
+    <loc>https://iknowyourage.games/ja/how-it-works/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iknowyourage.games/how-it-works/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://iknowyourage.games/ja/how-it-works/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://iknowyourage.games/zh/how-it-works/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://iknowyourage.games/es/how-it-works/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://iknowyourage.games/pt/how-it-works/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iknowyourage.games/how-it-works/"/>
+  </url>
+  <url>
+    <loc>https://iknowyourage.games/zh/how-it-works/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iknowyourage.games/how-it-works/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://iknowyourage.games/ja/how-it-works/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://iknowyourage.games/zh/how-it-works/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://iknowyourage.games/es/how-it-works/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://iknowyourage.games/pt/how-it-works/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iknowyourage.games/how-it-works/"/>
+  </url>
+  <url>
+    <loc>https://iknowyourage.games/es/how-it-works/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iknowyourage.games/how-it-works/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://iknowyourage.games/ja/how-it-works/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://iknowyourage.games/zh/how-it-works/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://iknowyourage.games/es/how-it-works/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://iknowyourage.games/pt/how-it-works/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iknowyourage.games/how-it-works/"/>
+  </url>
+  <url>
+    <loc>https://iknowyourage.games/pt/how-it-works/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iknowyourage.games/how-it-works/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://iknowyourage.games/ja/how-it-works/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://iknowyourage.games/zh/how-it-works/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://iknowyourage.games/es/how-it-works/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://iknowyourage.games/pt/how-it-works/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iknowyourage.games/how-it-works/"/>
+  </url>
+  <url>
+    <loc>https://iknowyourage.games/about/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iknowyourage.games/about/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://iknowyourage.games/ja/about/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://iknowyourage.games/zh/about/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://iknowyourage.games/es/about/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://iknowyourage.games/pt/about/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iknowyourage.games/about/"/>
+  </url>
+  <url>
+    <loc>https://iknowyourage.games/ja/about/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iknowyourage.games/about/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://iknowyourage.games/ja/about/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://iknowyourage.games/zh/about/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://iknowyourage.games/es/about/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://iknowyourage.games/pt/about/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iknowyourage.games/about/"/>
+  </url>
+  <url>
+    <loc>https://iknowyourage.games/zh/about/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iknowyourage.games/about/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://iknowyourage.games/ja/about/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://iknowyourage.games/zh/about/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://iknowyourage.games/es/about/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://iknowyourage.games/pt/about/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iknowyourage.games/about/"/>
+  </url>
+  <url>
+    <loc>https://iknowyourage.games/es/about/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iknowyourage.games/about/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://iknowyourage.games/ja/about/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://iknowyourage.games/zh/about/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://iknowyourage.games/es/about/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://iknowyourage.games/pt/about/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iknowyourage.games/about/"/>
+  </url>
+  <url>
+    <loc>https://iknowyourage.games/pt/about/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iknowyourage.games/about/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://iknowyourage.games/ja/about/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://iknowyourage.games/zh/about/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://iknowyourage.games/es/about/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://iknowyourage.games/pt/about/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iknowyourage.games/about/"/>
+  </url>
+  <url>
+    <loc>https://iknowyourage.games/privacy-policy/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iknowyourage.games/privacy-policy/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://iknowyourage.games/ja/privacy-policy/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://iknowyourage.games/zh/privacy-policy/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://iknowyourage.games/es/privacy-policy/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://iknowyourage.games/pt/privacy-policy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iknowyourage.games/privacy-policy/"/>
+  </url>
+  <url>
+    <loc>https://iknowyourage.games/ja/privacy-policy/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iknowyourage.games/privacy-policy/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://iknowyourage.games/ja/privacy-policy/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://iknowyourage.games/zh/privacy-policy/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://iknowyourage.games/es/privacy-policy/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://iknowyourage.games/pt/privacy-policy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iknowyourage.games/privacy-policy/"/>
+  </url>
+  <url>
+    <loc>https://iknowyourage.games/zh/privacy-policy/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iknowyourage.games/privacy-policy/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://iknowyourage.games/ja/privacy-policy/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://iknowyourage.games/zh/privacy-policy/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://iknowyourage.games/es/privacy-policy/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://iknowyourage.games/pt/privacy-policy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iknowyourage.games/privacy-policy/"/>
+  </url>
+  <url>
+    <loc>https://iknowyourage.games/es/privacy-policy/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iknowyourage.games/privacy-policy/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://iknowyourage.games/ja/privacy-policy/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://iknowyourage.games/zh/privacy-policy/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://iknowyourage.games/es/privacy-policy/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://iknowyourage.games/pt/privacy-policy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iknowyourage.games/privacy-policy/"/>
+  </url>
+  <url>
+    <loc>https://iknowyourage.games/pt/privacy-policy/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iknowyourage.games/privacy-policy/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://iknowyourage.games/ja/privacy-policy/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://iknowyourage.games/zh/privacy-policy/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://iknowyourage.games/es/privacy-policy/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://iknowyourage.games/pt/privacy-policy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iknowyourage.games/privacy-policy/"/>
+  </url>
+  <url>
+    <loc>https://iknowyourage.games/terms/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iknowyourage.games/terms/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://iknowyourage.games/ja/terms/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://iknowyourage.games/zh/terms/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://iknowyourage.games/es/terms/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://iknowyourage.games/pt/terms/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iknowyourage.games/terms/"/>
+  </url>
+  <url>
+    <loc>https://iknowyourage.games/ja/terms/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iknowyourage.games/terms/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://iknowyourage.games/ja/terms/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://iknowyourage.games/zh/terms/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://iknowyourage.games/es/terms/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://iknowyourage.games/pt/terms/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iknowyourage.games/terms/"/>
+  </url>
+  <url>
+    <loc>https://iknowyourage.games/zh/terms/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iknowyourage.games/terms/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://iknowyourage.games/ja/terms/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://iknowyourage.games/zh/terms/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://iknowyourage.games/es/terms/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://iknowyourage.games/pt/terms/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iknowyourage.games/terms/"/>
+  </url>
+  <url>
+    <loc>https://iknowyourage.games/es/terms/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iknowyourage.games/terms/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://iknowyourage.games/ja/terms/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://iknowyourage.games/zh/terms/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://iknowyourage.games/es/terms/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://iknowyourage.games/pt/terms/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iknowyourage.games/terms/"/>
+  </url>
+  <url>
+    <loc>https://iknowyourage.games/pt/terms/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iknowyourage.games/terms/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://iknowyourage.games/ja/terms/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://iknowyourage.games/zh/terms/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://iknowyourage.games/es/terms/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://iknowyourage.games/pt/terms/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iknowyourage.games/terms/"/>
+  </url>
+  <url>
+    <loc>https://iknowyourage.games/contact/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iknowyourage.games/contact/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://iknowyourage.games/ja/contact/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://iknowyourage.games/zh/contact/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://iknowyourage.games/es/contact/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://iknowyourage.games/pt/contact/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iknowyourage.games/contact/"/>
+  </url>
+  <url>
+    <loc>https://iknowyourage.games/ja/contact/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iknowyourage.games/contact/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://iknowyourage.games/ja/contact/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://iknowyourage.games/zh/contact/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://iknowyourage.games/es/contact/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://iknowyourage.games/pt/contact/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iknowyourage.games/contact/"/>
+  </url>
+  <url>
+    <loc>https://iknowyourage.games/zh/contact/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iknowyourage.games/contact/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://iknowyourage.games/ja/contact/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://iknowyourage.games/zh/contact/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://iknowyourage.games/es/contact/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://iknowyourage.games/pt/contact/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iknowyourage.games/contact/"/>
+  </url>
+  <url>
+    <loc>https://iknowyourage.games/es/contact/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iknowyourage.games/contact/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://iknowyourage.games/ja/contact/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://iknowyourage.games/zh/contact/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://iknowyourage.games/es/contact/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://iknowyourage.games/pt/contact/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iknowyourage.games/contact/"/>
+  </url>
+  <url>
+    <loc>https://iknowyourage.games/pt/contact/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iknowyourage.games/contact/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://iknowyourage.games/ja/contact/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://iknowyourage.games/zh/contact/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://iknowyourage.games/es/contact/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://iknowyourage.games/pt/contact/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iknowyourage.games/contact/"/>
+  </url>
 </urlset>

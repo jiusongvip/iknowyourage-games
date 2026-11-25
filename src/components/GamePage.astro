@@ -11,10 +11,12 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
-import { SEO, LANGS, PATHS, HTML_LANG, OG_LOCALE, LANG_NAMES } from '../i18n/seo.mjs';
+import { SEO, THICK, LANGS, PATHS, HTML_LANG, OG_LOCALE, LANG_NAMES } from '../i18n/seo.mjs';
+import { PAGES, CONTENT_SLUGS, pagePath } from '../i18n/pages.mjs';
 
 const { lang } = Astro.props;
 const seo = SEO[lang];
+const thick = THICK[lang];
 const site = 'https://iknowyourage.games';
 const canonical = site + PATHS[lang];
 
@@ -22,7 +24,11 @@ const root = process.cwd();
 const original = fs.readFileSync(path.join(root, 'src/game/original.html'), 'utf8');
 
 const headPart = original.slice(original.indexOf('<head>'), original.indexOf('</head>'));
-const fontLinks = (headPart.match(/<link[^>]*fonts[^>]*>/g) || []).join('\n');
+const fontLinks = (headPart.match(/<link[^>]*fonts[^>]*>/g) || [])
+  .join('\n')
+  // Fix 2: load the 400 weight of Noto Sans SC as well, so Chinese text is
+  // never rendered in a mismatched synthesised weight.
+  .replace('family=Noto+Sans+SC:wght@700;900', 'family=Noto+Sans+SC:wght@400;700;900');
 const styleBlocks = (original.match(/<style>[\s\S]*?<\/style>/g) || []).join('\n');
 
 const bodyPart = original.slice(original.indexOf('<body>') + '<body>'.length, original.indexOf('</body>'));
@@ -54,6 +60,18 @@ scripts = mustReplace(
   "b.addEventListener('click', function () { setLang(b.dataset.lang); });",
   "b.addEventListener('click', function () { var c = b.dataset.lang; window.location.href = c === 'en' ? '/' : '/' + c + '/'; });",
   'lang switcher routes'
+);
+// Fix 1 (localisation): the engine model — which owns the special profile
+// (prof) and home questions — was built once from the raw English bank, so
+// those inserted questions rendered in English in every other language.
+// Build the model from the active language's bank instead, and rebuild it
+// when the bank changes. Localised items are copies with identical ids and
+// numeric parameters, so the guessing math is unchanged.
+scripts = mustReplace(
+  scripts,
+  '        function ensureModel() {\n          if (!model) model = window.AgeEngine.buildModel(window.AGE_BANK, nowYear());\n          return model;\n        }',
+  '        var modelBank = null;\n        function ensureModel() {\n          if (!model || modelBank !== BANK_CUR) {\n            model = window.AgeEngine.buildModel(BANK_CUR, nowYear());\n            modelBank = BANK_CUR;\n          }\n          return model;\n        }',
+  'ensureModel localised bank'
 );
 
 // --- UI strings for this language, from the game's own packs ---
@@ -140,10 +158,29 @@ const seoCss = `<style>
 .seo-wrap dd{margin:4px 0 0}
 .seo-langs{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
 .seo-langs a{border:2px solid var(--ink,#221D19);border-radius:999px;padding:5px 14px;text-decoration:none;color:var(--ink,#221D19);font-weight:800;font-size:14px;background:var(--pop-tint,#FFF3C4)}
+.seo-wrap ul{padding-left:22px;margin:8px 0}
+.seo-wrap li{margin:4px 0}
+.site-foot{max-width:640px;margin:0 auto 44px;padding:0 8px;text-align:center;font-family:var(--font,sans-serif);color:var(--ink,#221D19)}
+.site-foot nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:10px}
+.site-foot nav a{border:2px solid var(--ink,#221D19);border-radius:999px;padding:5px 14px;text-decoration:none;color:var(--ink,#221D19);font-weight:800;font-size:13.5px;background:#FFFDF7}
+.site-foot p{font-size:13px;opacity:.75;margin:0}
 </style>`;
 
+// Fix 2 (crisp CJK): on the Chinese page, drop the Japanese display/rounded
+// fonts — Dela Gothic One and M PLUS Rounded 1c lack Simplified Chinese
+// glyphs, so headings fell back per-character to Noto Sans SC and rendered
+// as a smeared mix of two fonts and weights. Use one unified Noto Sans SC
+// stack (400/700/900 all loaded) for both the game UI and the SEO card.
+const zhFontCss =
+  lang === 'zh'
+    ? `<style>
+:root{--display:'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;--font:'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif}
+.seo-wrap h1,.seo-wrap h2{font-weight:900;text-shadow:none;-webkit-text-stroke:0}
+</style>`
+    : '';
+
 const headRaw =
-  fontLinks + '\n' + styleBlocks + '\n' + seoCss +
+  fontLinks + '\n' + styleBlocks + '\n' + seoCss + '\n' + zhFontCss +
   '\n<script type="application/ld+json">' + jsonLd + '</script>';
 ---
 
@@ -197,6 +234,20 @@ const headRaw =
       </ol>
       <h2>{seo.strataH}</h2>
       <p>{seo.strata}</p>
+      <h2>{thick.memH}</h2>
+      <p>{thick.memIntro}</p>
+      <ul>
+        {thick.memCats.map((c) => (
+          <li>
+            <strong>{c.name}</strong> — {c.ex}
+          </li>
+        ))}
+      </ul>
+      <h2>{thick.exH}</h2>
+      <p>{thick.ex}</p>
+      <ul>
+        {thick.exList.map((t) => <li>{t}</li>)}
+      </ul>
       <h2>{seo.faqH}</h2>
       <dl>
         {seo.faq.map((f) => (
@@ -207,12 +258,21 @@ const headRaw =
         ))}
       </dl>
       <h2>{seo.navH}</h2>
+      <p>{thick.langIntro}</p>
       <nav class="seo-langs">
         {LANGS.map((l) => (
           <a href={PATHS[l]} hreflang={HTML_LANG[l]}>{LANG_NAMES[l]}</a>
         ))}
       </nav>
     </article>
+    <footer class="site-foot">
+      <nav>
+        {CONTENT_SLUGS.map((s) => (
+          <a href={pagePath(lang, s)}>{PAGES[lang][s].nav}</a>
+        ))}
+      </nav>
+      <p>{thick.footNote}</p>
+    </footer>
     <Fragment set:html={scripts} />
   </body>
 </html>

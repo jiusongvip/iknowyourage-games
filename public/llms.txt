@@ -14,3 +14,10 @@ I Know Your Age is a free online age-guessing game for anyone who enjoys nostalg
 - Sign-up: not required
 - Questions per game: 12–45, adaptive; one guess at the end
 - Languages: English, Japanese, Simplified Chinese, Spanish, Portuguese
+
+## More pages (each in all 5 languages: /, /ja/, /zh/, /es/, /pt/)
+- How it works: https://iknowyourage.games/how-it-works/
+- About: https://iknowyourage.games/about/
+- Privacy policy: https://iknowyourage.games/privacy-policy/
+- Terms of use: https://iknowyourage.games/terms/
+- Contact: https://iknowyourage.games/contact/
