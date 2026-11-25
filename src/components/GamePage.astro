@@ -11,6 +11,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
+import crypto from 'node:crypto';
 import { SEO, THICK, LANGS, PATHS, HTML_LANG, OG_LOCALE, LANG_NAMES } from '../i18n/seo.mjs';
 import { PAGES, CONTENT_SLUGS, pagePath } from '../i18n/pages.mjs';
 
@@ -21,6 +22,19 @@ const site = 'https://iknowyourage.games';
 const canonical = site + PATHS[lang];
 
 const root = process.cwd();
+
+// --- asset cache-busting version -------------------------------------------
+// Derived from the CONTENT of bank.js + the four language packs: the string
+// changes exactly when any of those files changes and is stable otherwise.
+// It is appended as ?v= to every asset URL the page emits (bank <script>
+// tag and the on-demand language-pack loader), so after a content fix a
+// returning browser fetches the new pack instead of reusing a cached one.
+const assetHash = crypto.createHash('sha256');
+for (const f of ['bank.js', 'lang-es.js', 'lang-ja.js', 'lang-pt.js', 'lang-zh.js']) {
+  assetHash.update(f);
+  assetHash.update(fs.readFileSync(path.join(root, 'public/assets', f)));
+}
+const assetVersion = assetHash.digest('hex').slice(0, 10);
 const original = fs.readFileSync(path.join(root, 'src/game/original.html'), 'utf8');
 
 const headPart = original.slice(original.indexOf('<head>'), original.indexOf('</head>'));
@@ -42,11 +56,11 @@ function mustReplace(str, from, to, label) {
 }
 
 // --- routing-only patches to the UI script (engine + bank data untouched) ---
-scripts = mustReplace(scripts, 'src="assets/bank.js"', 'src="/assets/bank.js"', 'bank src');
+scripts = mustReplace(scripts, 'src="assets/bank.js"', 'src="/assets/bank.js?v=' + assetVersion + '"', 'bank src');
 scripts = mustReplace(
   scripts,
   "s.src = 'assets/lang-' + code + '.js';",
-  "s.src = '/assets/lang-' + code + '.js';",
+  "s.src = '/assets/lang-' + code + '.js?v=" + assetVersion + "';",
   'lang pack src'
 );
 scripts = mustReplace(

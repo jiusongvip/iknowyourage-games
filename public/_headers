@@ -1,0 +1,13 @@
+# Cache rules for Cloudflare Pages.
+# Rules run in file order and a repeated Cache-Control would be joined with
+# a comma, so the /assets/* block first detaches the catch-all value (!)
+# and then sets its own. Versioned asset URLs (?v=<content hash>, injected
+# at build time in GamePage.astro) make the long immutable rule safe: any
+# bank/language-pack change ships under a new URL, so a browser can never
+# pair a stale cached pack with a fresh page.
+/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+/assets/*
+  ! Cache-Control
+  Cache-Control: public, max-age=31536000, immutable
