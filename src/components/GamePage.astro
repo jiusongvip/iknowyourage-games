@@ -1,0 +1,218 @@
+---
+// GamePage — one prerendered language page of I Know Your Age.
+//
+// The game itself is the original single-file build (src/game/original.html,
+// byte-identical to the pre-Astro index.html). At build time we split it
+// into head styles / body markup / scripts, apply four routing-only patches
+// to the UI script (engine script and question-bank data are NOT touched),
+// localise the static markup from the game's own language packs, and wrap
+// it with per-language SEO head tags, a server-rendered content section
+// (H1 / intro / how-to / memory strata / FAQ) and JSON-LD.
+import fs from 'node:fs';
+import path from 'node:path';
+import vm from 'node:vm';
+import { SEO, LANGS, PATHS, HTML_LANG, OG_LOCALE, LANG_NAMES } from '../i18n/seo.mjs';
+
+const { lang } = Astro.props;
+const seo = SEO[lang];
+const site = 'https://iknowyourage.games';
+const canonical = site + PATHS[lang];
+
+const root = process.cwd();
+const original = fs.readFileSync(path.join(root, 'src/game/original.html'), 'utf8');
+
+const headPart = original.slice(original.indexOf('<head>'), original.indexOf('</head>'));
+const fontLinks = (headPart.match(/<link[^>]*fonts[^>]*>/g) || []).join('\n');
+const styleBlocks = (original.match(/<style>[\s\S]*?<\/style>/g) || []).join('\n');
+
+const bodyPart = original.slice(original.indexOf('<body>') + '<body>'.length, original.indexOf('</body>'));
+const scriptStart = bodyPart.indexOf('<script src=');
+let markup = bodyPart.slice(0, scriptStart);
+let scripts = bodyPart.slice(scriptStart);
+
+function mustReplace(str, from, to, label) {
+  if (!str.includes(from)) throw new Error('GamePage patch failed: ' + label);
+  return str.split(from).join(to);
+}
+
+// --- routing-only patches to the UI script (engine + bank data untouched) ---
+scripts = mustReplace(scripts, 'src="assets/bank.js"', 'src="/assets/bank.js"', 'bank src');
+scripts = mustReplace(
+  scripts,
+  "s.src = 'assets/lang-' + code + '.js';",
+  "s.src = '/assets/lang-' + code + '.js';",
+  'lang pack src'
+);
+scripts = mustReplace(
+  scripts,
+  'function initialLang() {\n          var q = null;',
+  'function initialLang() {\n          if (window.__PAGE_LANG) return window.__PAGE_LANG;\n          var q = null;',
+  'initialLang page lang'
+);
+scripts = mustReplace(
+  scripts,
+  "b.addEventListener('click', function () { setLang(b.dataset.lang); });",
+  "b.addEventListener('click', function () { var c = b.dataset.lang; window.location.href = c === 'en' ? '/' : '/' + c + '/'; });",
+  'lang switcher routes'
+);
+
+// --- UI strings for this language, from the game's own packs ---
+function extractUiEn(scriptsText) {
+  const key = 'var UI_EN = ';
+  const i = scriptsText.indexOf(key);
+  if (i < 0) throw new Error('UI_EN not found');
+  const start = scriptsText.indexOf('{', i);
+  let depth = 0, inStr = null, esc = false;
+  for (let k = start; k < scriptsText.length; k++) {
+    const c = scriptsText[k];
+    if (inStr) {
+      if (esc) esc = false;
+      else if (c === '\\') esc = true;
+      else if (c === inStr) inStr = null;
+      continue;
+    }
+    if (c === "'" || c === '"') { inStr = c; continue; }
+    if (c === '{') depth++;
+    if (c === '}') { depth--; if (depth === 0) return vm.runInNewContext('(' + scriptsText.slice(start, k + 1) + ')'); }
+  }
+  throw new Error('UI_EN unbalanced');
+}
+
+let ui;
+if (lang === 'en') {
+  ui = extractUiEn(scripts);
+} else {
+  const sandbox = { window: {} };
+  vm.createContext(sandbox);
+  vm.runInContext(fs.readFileSync(path.join(root, 'public/assets/lang-' + lang + '.js'), 'utf8'), sandbox);
+  ui = sandbox.window.AGE_LANG[lang].ui;
+}
+
+// --- localise the static (no-JS) markup from the pack ---
+const escHtml = (t) => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+function setTextById(html, id, text) {
+  if (text == null) return html;
+  const re = new RegExp('(<[^>]*\\bid="' + id + '"[^>]*>)[\\s\\S]*?(</[a-zA-Z][^>]*>)');
+  return html.replace(re, (m, open, close) => open + escHtml(text) + close);
+}
+const idToUi = {
+  barTitle: 'gameTitle', heroTitle: 'gameTitle', heroSub: 'heroSub', heroFacts: 'heroFacts',
+  startBtn: 'start', heroNote: 'heroNote', finePrint: 'fine', qHint: 'qHint',
+  langTitle: 'langTitle', helpTitle: 'helpTitle', help1: 'help1', help2: 'help2',
+  help3: 'help3', help4: 'help4', helpNote: 'helpNote', helpOkBtn: 'gotItBtn',
+};
+for (const [id, key] of Object.entries(idToUi)) markup = setTextById(markup, id, ui[key]);
+
+// --- JSON-LD: WebApplication + FAQPage (matching the visible FAQ) ---
+const jsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebApplication',
+      name: ui.gameTitle,
+      url: canonical,
+      applicationCategory: 'GameApplication',
+      operatingSystem: 'Web browser',
+      inLanguage: HTML_LANG[lang],
+      isAccessibleForFree: true,
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+      description: seo.metaDesc,
+    },
+    {
+      '@type': 'FAQPage',
+      inLanguage: HTML_LANG[lang],
+      mainEntity: seo.faq.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    },
+  ],
+});
+
+const seoCss = `<style>
+.seo-wrap{max-width:640px;margin:10px auto 44px;padding:24px 22px 26px;background:#fffdf7;border:2px solid var(--ink,#221D19);border-radius:14px;box-shadow:0 10px 22px -12px rgba(60,40,20,.45);font-family:var(--font,sans-serif);color:var(--ink,#221D19)}
+.seo-wrap h1{font-family:var(--display,sans-serif);font-size:26px;line-height:1.35;margin:0 0 12px}
+.seo-wrap h2{font-family:var(--display,sans-serif);font-size:19px;margin:26px 0 8px}
+.seo-wrap p,.seo-wrap li,.seo-wrap dd{font-size:15px;line-height:1.75}
+.seo-wrap ol{padding-left:22px;margin:8px 0}
+.seo-wrap dt{font-weight:900;margin-top:14px;font-size:15px}
+.seo-wrap dd{margin:4px 0 0}
+.seo-langs{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.seo-langs a{border:2px solid var(--ink,#221D19);border-radius:999px;padding:5px 14px;text-decoration:none;color:var(--ink,#221D19);font-weight:800;font-size:14px;background:var(--pop-tint,#FFF3C4)}
+</style>`;
+
+const headRaw =
+  fontLinks + '\n' + styleBlocks + '\n' + seoCss +
+  '\n<script type="application/ld+json">' + jsonLd + '</script>';
+---
+
+<!doctype html>
+<html lang={HTML_LANG[lang]}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light" />
+    <title>{seo.metaTitle}</title>
+    <meta name="description" content={seo.metaDesc} />
+    <link rel="canonical" href={canonical} />
+    {LANGS.map((l) => (
+      <link rel="alternate" hreflang={HTML_LANG[l]} href={site + PATHS[l]} />
+    ))}
+    <link rel="alternate" hreflang="x-default" href={site + '/'} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="I Know Your Age" />
+    <meta property="og:title" content={seo.metaTitle} />
+    <meta property="og:description" content={seo.metaDesc} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={OG_LOCALE[lang]} />
+    <meta property="og:image" content={site + '/icon.webp'} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={seo.metaTitle} />
+    <meta name="twitter:description" content={seo.metaDesc} />
+    <meta name="twitter:image" content={site + '/icon.webp'} />
+    <link rel="icon" href="/icon.webp" type="image/webp" />
+    <script define:vars={{ pageLang: lang, pagePath: PATHS[lang] }}>
+      window.__PAGE_LANG = pageLang;
+      try {
+        var q = new URLSearchParams(window.location.search).get('lang');
+        if (q) {
+          var c = String(q).toLowerCase();
+          var code = c.indexOf('ja') === 0 ? 'ja' : c.indexOf('zh') === 0 ? 'zh' : c.indexOf('es') === 0 ? 'es' : c.indexOf('pt') === 0 ? 'pt' : 'en';
+          var target = code === 'en' ? '/' : '/' + code + '/';
+          if (target !== pagePath) window.location.replace(target);
+        }
+      } catch (e) { /* no query handling */ }
+    </script>
+    <Fragment set:html={headRaw} />
+  </head>
+  <body>
+    <Fragment set:html={markup} />
+    <article class="seo-wrap">
+      <h1>{seo.h1}</h1>
+      {seo.intro.map((p) => <p>{p}</p>)}
+      <h2>{seo.howH}</h2>
+      <ol>
+        {seo.steps.map((s) => <li>{s}</li>)}
+      </ol>
+      <h2>{seo.strataH}</h2>
+      <p>{seo.strata}</p>
+      <h2>{seo.faqH}</h2>
+      <dl>
+        {seo.faq.map((f) => (
+          <>
+            <dt>{f.q}</dt>
+            <dd>{f.a}</dd>
+          </>
+        ))}
+      </dl>
+      <h2>{seo.navH}</h2>
+      <nav class="seo-langs">
+        {LANGS.map((l) => (
+          <a href={PATHS[l]} hreflang={HTML_LANG[l]}>{LANG_NAMES[l]}</a>
+        ))}
+      </nav>
+    </article>
+    <Fragment set:html={scripts} />
+  </body>
+</html>

@@ -1,0 +1,16 @@
+# I Know Your Age — iknowyourage.games
+
+I Know Your Age is a free online age-guessing game for anyone who enjoys nostalgia quizzes: it asks 12–45 questions about the pop-culture trends, games, school and everyday things you remember, then guesses your exact age from your answers and shows your "memory strata" by decade. No sign-up, no download; it runs in the browser.
+
+## Pages
+- English: https://iknowyourage.games/
+- 日本語: https://iknowyourage.games/ja/
+- 简体中文: https://iknowyourage.games/zh/
+- Español: https://iknowyourage.games/es/
+- Português: https://iknowyourage.games/pt/
+
+## Facts
+- Price: free
+- Sign-up: not required
+- Questions per game: 12–45, adaptive; one guess at the end
+- Languages: English, Japanese, Simplified Chinese, Spanish, Portuguese
