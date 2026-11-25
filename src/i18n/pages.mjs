@@ -176,7 +176,7 @@ export const PAGES = {
     contact: {
       nav: 'Contact',
       metaTitle: 'Contact — I Know Your Age',
-      metaDesc: 'How to reach the I Know Your Age team: report a bug or a wrong question through the public GitHub repository.',
+      metaDesc: 'How to reach the I Know Your Age team, report a bug or a wrong question, and where to ask about privacy.',
       h1: 'Contact',
       sections: [
         {
@@ -188,10 +188,9 @@ export const PAGES = {
         {
           h: 'Report a bug or a wrong question',
           body: [
-            'The code for this site lives in a public GitHub repository. If you spot a bug, a translation mistake, or a question you think is dated wrong, opening an issue there is the fastest way to get it in front of us:',
+            'If you spot a bug, a translation mistake, or a question you think is dated wrong, we want to know. A feedback inbox for this site is being set up and will be listed on this page.',
           ],
-          link: { href: 'https://github.com/jiusongvip/iknowyourage-games', label: 'github.com/jiusongvip/iknowyourage-games' },
-        },
+          },
         {
           h: 'Privacy questions',
           body: ['For anything about privacy, please read the privacy policy first — it explains what the game does (and does not do) with your answers.'],
@@ -364,7 +363,7 @@ PAGES.ja = {
   contact: {
     nav: 'お問い合わせ',
     metaTitle: 'お問い合わせ — あなたの年齢を当てます',
-    metaDesc: '「あなたの年齢を当てます」への連絡方法：不具合や質問の間違いは、公開GitHubリポジトリからご報告ください。',
+    metaDesc: '「あなたの年齢を当てます」への連絡方法：不具合や質問の間違いの報告、プライバシーについてのご質問。',
     h1: 'お問い合わせ',
     sections: [
       {
@@ -376,9 +375,8 @@ PAGES.ja = {
       {
         h: '不具合や質問の間違いの報告',
         body: [
-          'このサイトのコードは公開GitHubリポジトリにあります。不具合、翻訳の間違い、年代設定がおかしいと思う質問に気づいたら、そちらでIssueを立てるのがいちばん早く私たちに届きます：',
+          '不具合、翻訳の間違い、年代設定がおかしいと思う質問に気づいたら、ぜひ教えてください。このサイト専用のフィードバック窓口は現在準備中で、でき次第このページに掲載します。',
         ],
-        link: { href: 'https://github.com/jiusongvip/iknowyourage-games', label: 'github.com/jiusongvip/iknowyourage-games' },
       },
       {
         h: 'プライバシーについてのご質問',
@@ -549,7 +547,7 @@ PAGES.zh = {
   contact: {
     nav: '联系',
     metaTitle: '联系 — 我知道你几岁',
-    metaDesc: '如何联系《我知道你几岁》：通过公开的 GitHub 仓库报告 bug 或题目错误。',
+    metaDesc: '如何联系《我知道你几岁》团队：报告 bug 或题目错误，以及隐私问题的咨询方式。',
     h1: '联系我们',
     sections: [
       {
@@ -561,9 +559,8 @@ PAGES.zh = {
       {
         h: '报告 bug 或题目错误',
         body: [
-          '本站的代码放在一个公开的 GitHub 仓库里。如果你发现了 bug、翻译错误，或觉得某道题的年代标错了，在那里开一个 issue 是让我们看到的最快方式：',
+          '如果你发现了 bug、翻译错误，或觉得某道题的年代标错了，我们很想知道。本站的反馈邮箱正在设置中，设好后会公布在这一页。',
         ],
-        link: { href: 'https://github.com/jiusongvip/iknowyourage-games', label: 'github.com/jiusongvip/iknowyourage-games' },
       },
       {
         h: '隐私相关问题',
@@ -736,7 +733,7 @@ PAGES.es = {
   contact: {
     nav: 'Contacto',
     metaTitle: 'Contacto — Sé Tu Edad',
-    metaDesc: 'Cómo contactar con el equipo de Sé Tu Edad: informa de un error o de una pregunta incorrecta a través del repositorio público de GitHub.',
+    metaDesc: 'Cómo contactar con el equipo de Sé Tu Edad: informa de un error o de una pregunta incorrecta y consulta tus dudas de privacidad.',
     h1: 'Contacto',
     sections: [
       {
@@ -748,9 +745,8 @@ PAGES.es = {
       {
         h: 'Informa de un error o de una pregunta incorrecta',
         body: [
-          'El código de este sitio vive en un repositorio público de GitHub. Si detectas un error, un fallo de traducción o una pregunta que crees que está mal fechada, abrir un issue allí es la forma más rápida de que nos llegue:',
+          'Si detectas un error, un fallo de traducción o una pregunta que crees que está mal fechada, queremos saberlo. Estamos preparando un correo de contacto para este sitio y lo publicaremos en esta página.',
         ],
-        link: { href: 'https://github.com/jiusongvip/iknowyourage-games', label: 'github.com/jiusongvip/iknowyourage-games' },
       },
       {
         h: 'Preguntas sobre privacidad',
@@ -923,7 +919,7 @@ PAGES.pt = {
   contact: {
     nav: 'Contato',
     metaTitle: 'Contato — Sei Sua Idade',
-    metaDesc: 'Como falar com a equipe do Sei Sua Idade: relate um bug ou uma pergunta errada pelo repositório público no GitHub.',
+    metaDesc: 'Como falar com a equipe do Sei Sua Idade: relate um bug ou uma pergunta errada e tire dúvidas sobre privacidade.',
     h1: 'Contato',
     sections: [
       {
@@ -935,9 +931,8 @@ PAGES.pt = {
       {
         h: 'Relate um bug ou uma pergunta errada',
         body: [
-          'O código deste site vive em um repositório público no GitHub. Se você encontrar um bug, um erro de tradução ou uma pergunta que acha que está datada errado, abrir uma issue lá é a forma mais rápida de chegar até nós:',
+          'Se você encontrar um bug, um erro de tradução ou uma pergunta que acha que está datada errado, queremos saber. Estamos preparando um e-mail de feedback para este site e ele será publicado nesta página.',
         ],
-        link: { href: 'https://github.com/jiusongvip/iknowyourage-games', label: 'github.com/jiusongvip/iknowyourage-games' },
       },
       {
         h: 'Dúvidas sobre privacidade',
