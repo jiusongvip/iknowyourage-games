@@ -1,0 +1,216 @@
+---
+// Guide — English-only SEO guide page (no other-language versions exist,
+// so unlike ContentPage it emits no hreflang alternates and no language
+// switcher). Head, styling and footer mirror ContentPage.astro; the
+// FAQPage JSON-LD mirrors GamePage.astro and matches the visible FAQ.
+import { PAGES, CONTENT_SLUGS, pagePath } from '../i18n/pages.mjs';
+
+const site = 'https://iknowyourage.games';
+const canonical = site + '/guide/';
+const metaTitle = 'How I Know Your Age Works — The Memory Strata Age Guesser Guide';
+const metaDesc =
+  'The full guide to I Know Your Age, the memory strata age guesser: how to play, how the probability guessing works, what memory strata and the clincher are, tips for a sharper guess, and answers to common questions.';
+
+const steps = [
+  'Press Start on the homepage. You will be shown past trends, school and everyday life, slang and more — one memory at a time.',
+  'For each one, pick how well you know it — you used it, you saw it, you only heard the name, or you do not know it at all — or choose the answer that fits you. Quizzes pop up now and then.',
+  'If you don’t know or don’t remember something, honestly pick “Don’t know” or “Not sure”. Honest answers make the guess sharper, not weaker.',
+  'The questions adapt to your answers and stop when the game is confident — between 12 and 45 questions. Then it names your age, once, and shows you the memories that gave you away.',
+];
+
+const tips = [
+  'Answer honestly. The guess is built from what you actually know — pretending to recognise something only adds noise.',
+  'Use “Don’t know” freely. Not knowing something is real evidence: it cleanly rules out the ages that grew up with it.',
+  'Answer for the thing itself, not for what you learned later. Knowing a classic from re-runs and growing up with it are different signals, so pick the option that matches how you first met it.',
+  'Expect the questions to change as you go. Mixed answers mean a mixed generation signal, so the game keeps asking — that is normal, and it ends with one guess either way.',
+];
+
+const faq = [
+  {
+    q: 'How does the game figure out my age?',
+    a: 'Every question is tied to the years when something was popular and the ages of the people who knew it best. The game keeps a probability for every age from 6 to 85 and updates it with each answer, asking next about whatever would narrow it down the most, until it is confident enough to guess.',
+  },
+  {
+    q: 'How many questions does it ask?',
+    a: 'Between 12 and 45. If your answers point clearly at one generation it stops early; if they are mixed, it keeps asking. There is only ever one guess, at the very end.',
+  },
+  {
+    q: 'What are memory strata?',
+    a: 'On the result screen, your answers are drawn as memory strata — layers from the 1970s to the 2020s, like geological strata. The layer packed with the most “fossils” (things you knew and used) is usually the decade you grew up in.',
+  },
+  {
+    q: 'What is the clincher?',
+    a: 'One answer is highlighted as the clincher: the single response that narrowed your age range the most. It is often a small thing — the exact first phone, console or messenger you used.',
+  },
+  {
+    q: 'What happens if I answer “Don’t know” a lot?',
+    a: 'That is still useful information — not knowing something is a clue, too. Answering honestly gives a better guess than forcing an answer. If almost everything is unknown, the strata come out blank and the guess will be rough.',
+  },
+  {
+    q: 'Is I Know Your Age free? Do I need an account?',
+    a: 'Yes, it is completely free and there is no sign-up. It runs entirely in your browser, and your answers and the age it guesses are never sent to a server or stored anywhere.',
+  },
+];
+
+const jsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  inLanguage: 'en',
+  mainEntity: faq.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+});
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light" />
+    <title>{metaTitle}</title>
+    <meta name="description" content={metaDesc} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="I Know Your Age" />
+    <meta property="og:title" content={metaTitle} />
+    <meta property="og:description" content={metaDesc} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:image" content={site + '/icon.webp'} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={metaTitle} />
+    <meta name="twitter:description" content={metaDesc} />
+    <meta name="twitter:image" content={site + '/icon.webp'} />
+    <link rel="icon" href="/icon.webp" type="image/webp" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=M+PLUS+Rounded+1c:wght@700;800;900&family=Noto+Sans+SC:wght@400;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --ink: #221d19;
+        --bg: #f3ead9;
+        --display: 'Dela Gothic One', 'M PLUS Rounded 1c', 'Noto Sans SC', sans-serif;
+        --font: 'M PLUS Rounded 1c', 'Noto Sans SC', 'Hiragino Maru Gothic ProN', 'Hiragino Sans', sans-serif;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0; min-height: 100vh; padding: 28px 14px 48px;
+        font-family: var(--font); font-weight: 700; line-height: 1.6;
+        color: var(--ink); background: var(--bg);
+      }
+      .content-wrap {
+        max-width: 640px; margin: 0 auto; padding: 26px 24px 28px;
+        background: #fffdf7; border: 2px solid var(--ink); border-radius: 14px;
+        box-shadow: 0 10px 22px -12px rgba(60, 40, 20, 0.45);
+      }
+      .content-top {
+        display: flex; align-items: center; justify-content: space-between; gap: 10px;
+        margin-bottom: 18px; flex-wrap: wrap;
+      }
+      .content-top a.brand {
+        font-family: var(--display); font-size: 17px; color: var(--ink); text-decoration: none;
+      }
+      a.play-btn {
+        background: #ffc93c; border: 2px solid var(--ink); border-radius: 999px;
+        padding: 6px 16px; color: var(--ink); text-decoration: none; font-weight: 900; font-size: 14px;
+      }
+      h1 { font-family: var(--display); font-size: 26px; line-height: 1.35; margin: 0 0 14px; }
+      h2 { font-family: var(--display); font-size: 19px; margin: 26px 0 8px; }
+      p, li { font-size: 15px; line-height: 1.75; }
+      ul, ol { padding-left: 22px; margin: 8px 0; }
+      .content-foot { margin-top: 30px; border-top: 2px dashed rgba(34, 29, 25, 0.25); padding-top: 16px; }
+      .content-foot nav { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+      .content-foot nav a {
+        border: 2px solid var(--ink); border-radius: 999px; padding: 4px 13px;
+        text-decoration: none; color: var(--ink); font-weight: 800; font-size: 13.5px; background: #fff3c4;
+      }
+    </style>
+    <script type="application/ld+json" set:html={jsonLd} />
+    <script defer src="https://www.pvuv.ai/f.js" data-api="https://in.pvuv.ai" data-site="VLLpaSJf"></script>
+  </head>
+  <body>
+    <main class="content-wrap">
+      <div class="content-top">
+        <a class="brand" href="/">I Know Your Age</a>
+        <a class="play-btn" href="/">Play the game</a>
+      </div>
+      <article>
+        <h1>How I Know Your Age works: the memory strata age guesser guide</h1>
+        <p>
+          I Know Your Age is a free browser game that guesses your exact age from the pop-culture
+          memories you grew up with. It never asks your birth year. Instead, it asks what you
+          remember — the cartoons you watched, the games you played, the things everyone at school
+          had — and turns those answers into a single guess. This guide explains how to play, how
+          the guessing works, and what the memory strata on your result screen actually mean.
+        </p>
+
+        <h2>How to play</h2>
+        <ol>
+          {steps.map((s) => <li>{s}</li>)}
+        </ol>
+
+        <h2>How the guessing works</h2>
+        <p>
+          Behind the scenes, the game keeps a probability for every age from 6 to 85. Every one of
+          the 297 questions is tied to the years when that thing was popular, and to the ages of the
+          people who knew it best — so each answer raises the probability of some ages and lowers
+          others. The confidence meter at the top shows how concentrated those probabilities have
+          become: the narrower the range of likely ages, the higher the percentage.
+        </p>
+        <p>
+          The next question is always chosen to be the one expected to narrow the range the most.
+          If you answer “Don’t know” several times in a row, the game throws in a broader profile or
+          home-life question to check the basics from another angle. When the game is confident
+          enough, it stops — somewhere between 12 and 45 questions — and makes its single guess.
+          There are no second tries: one game, one guess.
+        </p>
+
+        <h2>What are memory strata?</h2>
+        <p>
+          On the result screen, your answers are drawn as memory strata — layers from the 1970s to
+          the 2020s, stacked like geological strata. Each thing you knew and used becomes a
+          “fossil” in the layer of its decade. The layer packed with the most fossils is usually
+          the decade you grew up in, because the memories you formed as a kid and a teenager are
+          the densest.
+        </p>
+        <p>
+          One answer is highlighted as the clincher: the single response that narrowed your age
+          range the most. It is often something small and specific — the exact first phone, game
+          console or messenger app you used pins you to a much narrower window than a famous movie
+          everyone has seen.
+        </p>
+
+        <h2>Tips for a sharper guess</h2>
+        <ul>
+          {tips.map((t) => <li>{t}</li>)}
+        </ul>
+
+        <h2>Frequently asked questions</h2>
+        {faq.map((f) => (
+          <>
+            <p><strong>{f.q}</strong></p>
+            <p>{f.a}</p>
+          </>
+        ))}
+
+        <p>
+          Ready to test it? <a href="/">Play I Know Your Age</a> — free, no sign-up, and over in a
+          couple of minutes.
+        </p>
+      </article>
+      <footer class="content-foot">
+        <nav>
+          {CONTENT_SLUGS.map((s) => (
+            <a href={pagePath('en', s)}>{PAGES.en[s].nav}</a>
+          ))}
+        </nav>
+      </footer>
+    </main>
+  </body>
+</html>

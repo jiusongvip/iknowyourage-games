@@ -8,6 +8,10 @@ import { LANGS, PATHS, HTML_LANG, OG_LOCALE, LANG_NAMES } from '../i18n/seo.mjs'
 
 const { lang, slug } = Astro.props;
 const page = PAGES[lang][slug];
+// Legal pages stay reachable and followable but out of the index (and out
+// of the sitemap), so search signals concentrate on the game/content pages.
+const NOINDEX_SLUGS = ['terms', 'privacy-policy', 'contact'];
+const noindex = NOINDEX_SLUGS.includes(slug);
 const site = 'https://iknowyourage.games';
 const canonical = site + pagePath(lang, slug);
 const gamePath = PATHS[lang];
@@ -24,6 +28,7 @@ const SITE_NAME = { en: 'I Know Your Age', ja: 'あなたの年齢を当てま�
     <meta name="color-scheme" content="light" />
     <title>{page.metaTitle}</title>
     <meta name="description" content={page.metaDesc} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
     <link rel="canonical" href={canonical} />
     {LANGS.map((l) => (
       <link rel="alternate" hreflang={HTML_LANG[l]} href={site + pagePath(l, slug)} />

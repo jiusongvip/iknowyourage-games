@@ -19,6 +19,7 @@ I Know Your Age is a free online age-guessing game for anyone who enjoys nostalg
 
 ## More pages (each in all 6 languages: /, /ja/, /zh/, /es/, /pt/, /ru/)
 - How it works: https://iknowyourage.games/how-it-works/
+- Guide (English only): https://iknowyourage.games/guide/ — how the memory strata age guesser works: how to play, the probability guessing, memory strata and the clincher, tips and FAQ
 - About: https://iknowyourage.games/about/
 - Privacy policy: https://iknowyourage.games/privacy-policy/
 - Terms of use: https://iknowyourage.games/terms/
