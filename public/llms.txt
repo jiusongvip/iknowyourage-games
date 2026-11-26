@@ -8,14 +8,16 @@ I Know Your Age is a free online age-guessing game for anyone who enjoys nostalg
 - 简体中文: https://iknowyourage.games/zh/
 - Español: https://iknowyourage.games/es/
 - Português: https://iknowyourage.games/pt/
+- Русский: https://iknowyourage.games/ru/
 
 ## Facts
 - Price: free
 - Sign-up: not required
 - Questions per game: 12–45, adaptive; one guess at the end
-- Languages: English, Japanese, Simplified Chinese, Spanish, Portuguese
+- Languages: English, Japanese, Simplified Chinese, Spanish, Portuguese, Russian
+- The Russian version adds 60 Russia-specific memory questions (Soviet and Russian childhood, 1970s–2020s) on top of the shared 297-question bank
 
-## More pages (each in all 5 languages: /, /ja/, /zh/, /es/, /pt/)
+## More pages (each in all 6 languages: /, /ja/, /zh/, /es/, /pt/, /ru/)
 - How it works: https://iknowyourage.games/how-it-works/
 - About: https://iknowyourage.games/about/
 - Privacy policy: https://iknowyourage.games/privacy-policy/

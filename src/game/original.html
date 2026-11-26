@@ -590,6 +590,7 @@
           <button class="lang-opt" type="button" data-lang="zh">简体中文<span class="lang-check" aria-hidden="true">✓</span></button>
           <button class="lang-opt" type="button" data-lang="es">Español<span class="lang-check" aria-hidden="true">✓</span></button>
           <button class="lang-opt" type="button" data-lang="pt">Português<span class="lang-check" aria-hidden="true">✓</span></button>
+          <button class="lang-opt" type="button" data-lang="ru">Русский<span class="lang-check" aria-hidden="true">✓</span></button>
         </div>
       </div>
     </div>
@@ -1218,7 +1219,7 @@
            (assets/lang-<code>.js, loaded on demand). Wording follows the original
            game's official translations; the question set and engine never change —
            only the text shown for each question id is swapped. */
-        var LANGS = ['en', 'ja', 'zh', 'es', 'pt'];
+        var LANGS = ['en', 'ja', 'zh', 'es', 'pt', 'ru'];
         var LANG = 'en';
         var UI_EN = {
           docTitle: 'I Know Your Age — Age Guess Game', gameTitle: 'I Know Your Age',
@@ -1312,6 +1313,9 @@
             if (o.dk != null) c.dk = o.dk;
             return c;
           });
+          if (pack.extra && pack.extra.length) {
+            for (var ei = 0; ei < pack.extra.length; ei++) out.push(Object.assign({}, pack.extra[ei]));
+          }
           bankCache[code] = out;
           return out;
         }

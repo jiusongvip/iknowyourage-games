@@ -30,7 +30,7 @@ const root = process.cwd();
 // tag and the on-demand language-pack loader), so after a content fix a
 // returning browser fetches the new pack instead of reusing a cached one.
 const assetHash = crypto.createHash('sha256');
-for (const f of ['bank.js', 'lang-es.js', 'lang-ja.js', 'lang-pt.js', 'lang-zh.js']) {
+for (const f of ['bank.js', 'lang-es.js', 'lang-ja.js', 'lang-pt.js', 'lang-ru.js', 'lang-zh.js']) {
   assetHash.update(f);
   assetHash.update(fs.readFileSync(path.join(root, 'public/assets', f)));
 }
@@ -229,7 +229,7 @@ const headRaw =
         var q = new URLSearchParams(window.location.search).get('lang');
         if (q) {
           var c = String(q).toLowerCase();
-          var code = c.indexOf('ja') === 0 ? 'ja' : c.indexOf('zh') === 0 ? 'zh' : c.indexOf('es') === 0 ? 'es' : c.indexOf('pt') === 0 ? 'pt' : 'en';
+          var code = c.indexOf('ja') === 0 ? 'ja' : c.indexOf('zh') === 0 ? 'zh' : c.indexOf('es') === 0 ? 'es' : c.indexOf('pt') === 0 ? 'pt' : c.indexOf('ru') === 0 ? 'ru' : 'en';
           var target = code === 'en' ? '/' : '/' + code + '/';
           if (target !== pagePath) window.location.replace(target);
         }
