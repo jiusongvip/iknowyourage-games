@@ -134,12 +134,11 @@
       .hero-note { margin: 10px auto 0; max-width: 480px; font-size: 14px; color: var(--ink-soft); }
       .fine { margin-top: 10px; font-size: 12px; color: var(--ink-soft); }
       .title-side { display: flex; flex-direction: column; align-items: center; }
-      .mode-picker { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 0 0 14px; width: 100%; max-width: 540px; }
-      .mode-opt { flex: 1 1 150px; max-width: 172px; padding: 9px 10px 8px; border: 2px solid var(--ink); border-radius: 12px; background: transparent; color: var(--ink); cursor: pointer; text-align: center; font: inherit; }
-      .mode-opt b { display: block; font-size: 15px; font-weight: 900; letter-spacing: 0.02em; }
-      .mode-opt span { display: block; margin-top: 2px; font-size: 11.5px; line-height: 1.35; color: var(--ink-soft); }
-      .mode-opt.is-on { background: var(--pop); border-color: var(--pop); }
-      .mode-opt.is-on span { color: var(--ink); opacity: 0.75; }
+      .mode-picker { display: inline-flex; gap: 4px; padding: 4px; margin: 0 0 8px; border: 2px solid var(--ink); border-radius: 999px; }
+      .mode-opt { padding: 7px 16px; border: none; border-radius: 999px; background: transparent; color: var(--ink); cursor: pointer; font: inherit; }
+      .mode-opt b { font-size: 14.5px; font-weight: 900; letter-spacing: 0.02em; white-space: nowrap; }
+      .mode-opt.is-on { background: var(--pop); }
+      .mode-desc { margin: 0 0 14px; font-size: 12.5px; color: var(--ink-soft); }
     </style>
     <style>
       /* ---------- quiz view ---------- */
@@ -466,10 +465,11 @@
         <div class="title-side">
           <p class="hero-facts" id="heroFacts">Questions until it knows · One guess, at the very end</p>
           <div class="mode-picker" id="modePicker" role="radiogroup" aria-label="Game mode">
-            <button type="button" class="mode-opt is-on" data-mode="classic" role="radio" aria-checked="true"><b id="modeClassicT">Classic</b><span id="modeClassicD">Until it knows · 12–45 questions</span></button>
-            <button type="button" class="mode-opt" data-mode="quick" role="radio" aria-checked="false"><b id="modeQuickT">Quick</b><span id="modeQuickD">8 questions · pass the phone</span></button>
-            <button type="button" class="mode-opt" data-mode="walk" role="radio" aria-checked="false"><b id="modeWalkT">Decade Walk</b><span id="modeWalkD">1970s → 2020s · 2 per decade</span></button>
+            <button type="button" class="mode-opt is-on" data-mode="classic" role="radio" aria-checked="true"><b id="modeClassicT">Classic</b></button>
+            <button type="button" class="mode-opt" data-mode="quick" role="radio" aria-checked="false"><b id="modeQuickT">Quick</b></button>
+            <button type="button" class="mode-opt" data-mode="walk" role="radio" aria-checked="false"><b id="modeWalkT">Decade Walk</b></button>
           </div>
+          <p class="mode-desc" id="modeDesc">Until it knows · 12–45 questions</p>
           <button class="btn btn-go btn-wide" type="button" id="startBtn" data-start>Start</button>
           <p class="hero-note" id="heroNote">If you don't know or don't remember, honestly pick "Don't know" or "Not sure". It makes the guess more accurate</p>
           <p class="fine" id="finePrint">*Just for fun</p>
@@ -1379,11 +1379,9 @@
           $('startBtn').textContent = u.start;
           $('modePicker').setAttribute('aria-label', u.modesAria);
           $('modeClassicT').textContent = u.modeClassic;
-          $('modeClassicD').textContent = u.modeClassicD;
           $('modeQuickT').textContent = u.modeQuick;
-          $('modeQuickD').textContent = u.modeQuickD;
           $('modeWalkT').textContent = u.modeWalk;
-          $('modeWalkD').textContent = u.modeWalkD;
+          $('modeDesc').textContent = { classic: u.modeClassicD, quick: u.modeQuickD, walk: u.modeWalkD }[gameMode] || u.modeClassicD;
           $('heroNote').textContent = u.heroNote;
           $('finePrint').textContent = u.fine;
           $('meterLabel').textContent = u.confidence;
@@ -1534,6 +1532,7 @@
         document.querySelectorAll('.mode-opt').forEach(function (b) {
           b.addEventListener('click', function () {
             gameMode = b.dataset.mode || 'classic';
+            $('modeDesc').textContent = { classic: P.ui.modeClassicD, quick: P.ui.modeQuickD, walk: P.ui.modeWalkD }[gameMode] || P.ui.modeClassicD;
             document.querySelectorAll('.mode-opt').forEach(function (x) {
               var on = x === b;
               x.classList.toggle('is-on', on);
