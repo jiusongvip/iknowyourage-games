@@ -134,6 +134,12 @@
       .hero-note { margin: 10px auto 0; max-width: 480px; font-size: 14px; color: var(--ink-soft); }
       .fine { margin-top: 10px; font-size: 12px; color: var(--ink-soft); }
       .title-side { display: flex; flex-direction: column; align-items: center; }
+      .mode-picker { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 0 0 14px; width: 100%; max-width: 540px; }
+      .mode-opt { flex: 1 1 150px; max-width: 172px; padding: 9px 10px 8px; border: 2px solid var(--ink); border-radius: 12px; background: transparent; color: var(--ink); cursor: pointer; text-align: center; font: inherit; }
+      .mode-opt b { display: block; font-size: 15px; font-weight: 900; letter-spacing: 0.02em; }
+      .mode-opt span { display: block; margin-top: 2px; font-size: 11.5px; line-height: 1.35; color: var(--ink-soft); }
+      .mode-opt.is-on { background: var(--pop); border-color: var(--pop); }
+      .mode-opt.is-on span { color: var(--ink); opacity: 0.75; }
     </style>
     <style>
       /* ---------- quiz view ---------- */
@@ -459,6 +465,11 @@
         </div>
         <div class="title-side">
           <p class="hero-facts" id="heroFacts">Questions until it knows · One guess, at the very end</p>
+          <div class="mode-picker" id="modePicker" role="radiogroup" aria-label="Game mode">
+            <button type="button" class="mode-opt is-on" data-mode="classic" role="radio" aria-checked="true"><b id="modeClassicT">Classic</b><span id="modeClassicD">Until it knows · 12–45 questions</span></button>
+            <button type="button" class="mode-opt" data-mode="quick" role="radio" aria-checked="false"><b id="modeQuickT">Quick</b><span id="modeQuickD">8 questions · pass the phone</span></button>
+            <button type="button" class="mode-opt" data-mode="walk" role="radio" aria-checked="false"><b id="modeWalkT">Decade Walk</b><span id="modeWalkD">1970s → 2020s · 2 per decade</span></button>
+          </div>
           <button class="btn btn-go btn-wide" type="button" id="startBtn" data-start>Start</button>
           <p class="hero-note" id="heroNote">If you don't know or don't remember, honestly pick "Don't know" or "Not sure". It makes the guess more accurate</p>
           <p class="fine" id="finePrint">*Just for fun</p>
@@ -899,7 +910,7 @@
           };
         }
 
-        function createGame(items, now, model) {
+        function createGame(items, now, model, mode) {
           var L = model.L, prior = model.prior;
           var profItem = model.profItem, homeItem = model.homeItem;
           var post = TW.map(function (w) { return prior.map(function (v) { return v * w; }); });
@@ -908,6 +919,31 @@
           var rewind = 0;
           var massCache = new Map();
           var tr = null;
+          var MODE = mode === 'quick' || mode === 'walk' ? mode : 'classic';
+          var walkQueue = null, walkIdx = 0;
+          if (MODE === 'walk') {
+            var byDec = {};
+            items.forEach(function (it) {
+              if (it.prof || it.home || typeof it.y !== 'number') return;
+              var d = Math.floor(it.y / 10) * 10;
+              if (d < 1970 || d > 2020) return;
+              (byDec[d] = byDec[d] || []).push(it);
+            });
+            walkQueue = [];
+            var seenGroups = new Set();
+            [1970, 1980, 1990, 2000, 2010, 2020].forEach(function (dec) {
+              var pool = (byDec[dec] || []).slice();
+              for (var i = pool.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var tmp = pool[i]; pool[i] = pool[j]; pool[j] = tmp; }
+              pool.sort(function (a, b) { return (a.t === 'know' ? 0 : 1) - (b.t === 'know' ? 0 : 1); });
+              var pickedN = 0;
+              for (var k = 0; k < pool.length && pickedN < 2; k++) {
+                var it2 = pool[k];
+                if (it2.group && seenGroups.has(it2.group)) continue;
+                if (it2.group) seenGroups.add(it2.group);
+                walkQueue.push(it2); pickedN++;
+              }
+            });
+          }
 
           function marg() {
             var m = new Array(N).fill(0);
@@ -1064,6 +1100,8 @@
           }
           function done() {
             var n = asked.length;
+            if (MODE === 'quick') return n >= 8;
+            if (MODE === 'walk') return n >= walkQueue.length;
             if (n >= R.maxQ) return true;
             if (n >= R.minQ && confOf(marg()).conf >= R.conf) return true;
             return false;
@@ -1074,6 +1112,10 @@
           }
           function next() {
             if (done()) return null;
+            if (MODE === 'walk') {
+              while (walkIdx < walkQueue.length && used.has(walkQueue[walkIdx].id)) walkIdx++;
+              return walkIdx < walkQueue.length ? walkQueue[walkIdx++] : null;
+            }
             var n = asked.length;
             if (homeItem && !used.has(homeItem.id) && asked.filter(function (a) { return a.dunno && a.pred < R.homeSurp && tvGame(a.item); }).length >= R.homeAfter) return homeItem;
             if (profItem && !used.has(profItem.id) && asked.filter(function (a) { return a.dunno; }).length >= R.profAfter) return profItem;
@@ -1226,6 +1268,10 @@
           heroSub: 'Your memories of old trends give away your age.',
           heroFacts: 'Questions until it knows · One guess, at the very end',
           start: 'Start',
+          modesAria: 'Game mode',
+          modeClassic: 'Classic', modeClassicD: 'Until it knows · 12–45 questions',
+          modeQuick: 'Quick', modeQuickD: '8 questions · pass the phone',
+          modeWalk: 'Decade Walk', modeWalkD: '1970s → 2020s · 2 per decade',
           heroNote: 'If you don\'t know or don\'t remember, honestly pick "Don\'t know" or "Not sure". It makes the guess more accurate',
           fine: '*Just for fun', confidence: 'Confidence',
           qHint: 'Not sure? Honestly pick "Don\'t know" or "Not sure"',
@@ -1331,6 +1377,13 @@
           $('heroSub').textContent = u.heroSub;
           $('heroFacts').textContent = u.heroFacts;
           $('startBtn').textContent = u.start;
+          $('modePicker').setAttribute('aria-label', u.modesAria);
+          $('modeClassicT').textContent = u.modeClassic;
+          $('modeClassicD').textContent = u.modeClassicD;
+          $('modeQuickT').textContent = u.modeQuick;
+          $('modeQuickD').textContent = u.modeQuickD;
+          $('modeWalkT').textContent = u.modeWalk;
+          $('modeWalkD').textContent = u.modeWalkD;
           $('heroNote').textContent = u.heroNote;
           $('finePrint').textContent = u.fine;
           $('meterLabel').textContent = u.confidence;
@@ -1457,6 +1510,7 @@
         var model = null, game = null, cur = null, opts = [];
         var busy = false, result = null;
         var picked = new Map();
+        var gameMode = 'classic';
 
         function ensureModel() {
           if (!model) model = window.AgeEngine.buildModel(window.AGE_BANK, nowYear());
@@ -1467,7 +1521,7 @@
           closeModal('shareModal');
           closeModal('helpModal');
           ensureModel();
-          game = window.AgeEngine.createGame(BANK_CUR, nowYear(), model);
+          game = window.AgeEngine.createGame(BANK_CUR, nowYear(), model, gameMode);
           result = null;
           picked.clear();
           showView('quizView');
@@ -1476,6 +1530,16 @@
         }
         document.querySelectorAll('[data-start]').forEach(function (b) {
           b.addEventListener('click', start);
+        });
+        document.querySelectorAll('.mode-opt').forEach(function (b) {
+          b.addEventListener('click', function () {
+            gameMode = b.dataset.mode || 'classic';
+            document.querySelectorAll('.mode-opt').forEach(function (x) {
+              var on = x === b;
+              x.classList.toggle('is-on', on);
+              x.setAttribute('aria-checked', on ? 'true' : 'false');
+            });
+          });
         });
 
         function optionsOf(it) {
