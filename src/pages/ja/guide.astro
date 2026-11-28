@@ -1,0 +1,199 @@
+---
+// Guide — Japanese version of the English /guide/ page. Same standalone
+// layout as guide.astro (head, styling and footer mirror ContentPage);
+// the copy is rewritten for Japan, not translated: examples come from the
+// 30-question Japanese memory pack (327 questions in total for /ja/).
+import { PAGES, CONTENT_SLUGS, pagePath } from '../../i18n/pages.mjs';
+
+const site = 'https://iknowyourage.games';
+const canonical = site + '/ja/guide/';
+const metaTitle = '「あなたの年齢を当てます」の仕組み — 記憶の地層 年齢当て完全ガイド';
+const metaDesc =
+  '「あなたの年齢を当てます」完全ガイド：遊び方、確率で年齢を絞り込む仕組み、記憶の地層と決め手の意味、もっと鋭く当てるコツ、よくある質問への回答。日本オリジナルの30問を含む全327問対応。';
+
+const steps = [
+  '日本語トップページで「スタート」を押します。流行、学校や日常のもの、言葉など、思い出がひとつずつ表示されます。',
+  'それぞれについて、どれくらい知っているか——使った、見た、名前だけ知っている、まったく知らない——あるいは自分に合う答えを選んでください。ときどきクイズも出ます。',
+  '知らない・覚えていないものは、正直に「知らない」「わからない」を選んでください。正直な答えほど、言い当ては鋭くなります。',
+  '質問はあなたの答えに合わせて変わり、自信が持てたところで止まります——12問から45問のあいだです。そして年齢を一度だけ言い当て、決め手になった思い出を見せてくれます。',
+];
+
+const tips = [
+  '正直に答えてください。言い当ては「あなたが本当に知っているもの」から組み立てられます。知ったかぶりをするとノイズが増えるだけです。',
+  '「知らない」は遠慮なく使ってください。知らないことも立派な証拠で、そのものと一緒に育った年齢の候補をきれいに消してくれます。',
+  '「あとから知ったもの」ではなく「当時どうだったか」で答えてください。再放送で知った名作と、リアルタイムで育ったのとでは信号が違います。最初に出会ったときの感覚に合う選択肢を選びましょう。',
+  '質問が途中で変わっていくのは普通のことです。答えが混ざっていると世代の信号も混ざるので、ゲームは聞き続けます——それでも最後は一度だけ言い当てます。',
+];
+
+const faq = [
+  {
+    q: 'どうやって年齢を当てているのですか？',
+    a: 'すべての質問が「それが流行った時期」と「いちばん親しんだ年齢層」に結びついています。ゲームは6歳から85歳までの各年齢の確率を保持し、答えるたびに更新しながら、いちばん範囲を絞り込める質問を次に出し続け、自信が持てたところで言い当てます。',
+  },
+  {
+    q: '質問は何問出ますか？',
+    a: '12問から45問のあいだです。答えがひとつの世代を明確に指していれば早く終わり、混ざっていれば聞き続けます。言い当ては最後に一度だけです。',
+  },
+  {
+    q: '記憶の地層とは何ですか？',
+    a: '結果画面で、あなたの答えが1970年代から2020年代までの「記憶の地層」として、地層のように積み重ねて描かれます。「化石」（知っていた・使っていたもの）がいちばん多い層が、だいたいあなたの育った年代です。',
+  },
+  {
+    q: '決め手とは何ですか？',
+    a: '年齢の範囲を最も絞り込んだ答えが「決め手」として示されます。最初に持ったゲーム機、プリクラ、ガラケーやmixiのような、その年代にしかない小さなものが決め手になることがよくあります。',
+  },
+  {
+    q: '「知らない」ばかり選ぶとどうなりますか？',
+    a: 'それも有用な情報です——知らないこともヒントになります。無理に答えるより、正直なほうが言い当ては良くなります。ほとんど知らないものばかりだと地層は空白に近くなり、言い当ても大ざっぱになります。',
+  },
+  {
+    q: '無料ですか？登録は必要ですか？',
+    a: 'はい、完全無料で、登録も不要です。ゲームはすべてブラウザの中で動き、あなたの答えや当てた年齢がサーバーに送られたり、保存されたりすることはありません。',
+  },
+];
+
+const jsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  inLanguage: 'ja',
+  mainEntity: faq.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+});
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light" />
+    <title>{metaTitle}</title>
+    <meta name="description" content={metaDesc} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="en" href={site + '/guide/'} />
+    <link rel="alternate" hreflang="ja" href={canonical} />
+    <link rel="alternate" hreflang="x-default" href={site + '/guide/'} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="I Know Your Age" />
+    <meta property="og:title" content={metaTitle} />
+    <meta property="og:description" content={metaDesc} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="ja_JP" />
+    <meta property="og:image" content={site + '/icon.webp'} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={metaTitle} />
+    <meta name="twitter:description" content={metaDesc} />
+    <meta name="twitter:image" content={site + '/icon.webp'} />
+    <link rel="icon" href="/icon.webp" type="image/webp" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=M+PLUS+Rounded+1c:wght@700;800;900&family=Noto+Sans+SC:wght@400;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --ink: #221d19;
+        --bg: #f3ead9;
+        --display: 'Dela Gothic One', 'M PLUS Rounded 1c', 'Noto Sans SC', sans-serif;
+        --font: 'M PLUS Rounded 1c', 'Noto Sans SC', 'Hiragino Maru Gothic ProN', 'Hiragino Sans', sans-serif;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0; min-height: 100vh; padding: 28px 14px 48px;
+        font-family: var(--font); font-weight: 700; line-height: 1.6;
+        color: var(--ink); background: var(--bg);
+      }
+      .content-wrap {
+        max-width: 640px; margin: 0 auto; padding: 26px 24px 28px;
+        background: #fffdf7; border: 2px solid var(--ink); border-radius: 14px;
+        box-shadow: 0 10px 22px -12px rgba(60, 40, 20, 0.45);
+      }
+      .content-top {
+        display: flex; align-items: center; justify-content: space-between; gap: 10px;
+        margin-bottom: 18px; flex-wrap: wrap;
+      }
+      .content-top a.brand {
+        font-family: var(--display); font-size: 17px; color: var(--ink); text-decoration: none;
+      }
+      a.play-btn {
+        background: #ffc93c; border: 2px solid var(--ink); border-radius: 999px;
+        padding: 6px 16px; color: var(--ink); text-decoration: none; font-weight: 900; font-size: 14px;
+      }
+      h1 { font-family: var(--display); font-size: 26px; line-height: 1.35; margin: 0 0 14px; }
+      h2 { font-family: var(--display); font-size: 19px; margin: 26px 0 8px; }
+      p, li { font-size: 15px; line-height: 1.75; }
+      ul, ol { padding-left: 22px; margin: 8px 0; }
+      .content-foot { margin-top: 30px; border-top: 2px dashed rgba(34, 29, 25, 0.25); padding-top: 16px; }
+      .content-foot nav { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+      .content-foot nav a {
+        border: 2px solid var(--ink); border-radius: 999px; padding: 4px 13px;
+        text-decoration: none; color: var(--ink); font-weight: 800; font-size: 13.5px; background: #fff3c4;
+      }
+    </style>
+    <script type="application/ld+json" set:html={jsonLd} />
+    <script defer src="https://www.pvuv.ai/f.js" data-api="https://in.pvuv.ai" data-site="VLLpaSJf"></script>
+  </head>
+  <body>
+    <main class="content-wrap">
+      <div class="content-top">
+        <a class="brand" href="/ja/">あなたの年齢を当てます</a>
+        <a class="play-btn" href="/ja/">遊ぶ</a>
+      </div>
+      <article>
+        <h1>「あなたの年齢を当てます」の仕組み：記憶の地層で当てる完全ガイド</h1>
+        <p>
+          「あなたの年齢を当てます」は、あなたが育ってきた流行りの記憶から、年齢をそのまま言い当てる無料のブラウザゲームです。生まれた年は聞きません。代わりに、見ていたアニメ、遊んだゲーム、学校でみんなが持っていたもの——そうした思い出への答えを、ひとつの言い当てに変えていきます。日本語版には、うまい棒、ゲーム&amp;ウオッチ、プリクラ、ケータイ小説といった日本オリジナルの質問30問が加わり、全327問から出題されます。このガイドでは、遊び方、言い当ての仕組み、そして結果画面の「記憶の地層」の意味を説明します。
+        </p>
+
+        <h2>遊び方</h2>
+        <ol>
+          {steps.map((s) => <li>{s}</li>)}
+        </ol>
+
+        <h2>言い当ての仕組み</h2>
+        <p>
+          裏側では、6歳から85歳までの各年齢について確率が保持されています。327問すべてが「それが流行った時期」と「いちばん親しんだ年齢層」に結びついているので、答えるたびに、ある年齢の確率は上がり、別の年齢の確率は下がります。上の「確信度」は、その確率がどれだけ一点に集まったかを示します——ありそうな年齢の幅が狭まるほど、パーセントが上がります。
+        </p>
+        <p>
+          次の質問は、常に「最も範囲を絞り込める」と見込まれるものが選ばれます。「知らない」が続くと、別の角度から基本を確認するために、生活や家のことについての広めの質問が割り込むこともあります。自信が持てたら——12問から45問のどこかで——質問は止まり、一度だけ言い当てます。やり直しはありません。1ゲームに、言い当ては1回だけです。
+        </p>
+
+        <h2>記憶の地層とは</h2>
+        <p>
+          結果画面では、あなたの答えが「記憶の地層」として描かれます。1970年代から2020年代までの層が、地層のように積み重なったものです。知っていた・使っていたものは、その年代の層の「化石」になります。化石がいちばん多い層が、だいたいあなたの育った年代です。子ども時代から十代にかけて形づくられた記憶がいちばん濃いからです。
+        </p>
+        <p>
+          そして、年齢の範囲を最も絞り込んだ答えが「決め手」として示されます。みんなが見た有名な映画よりも、最初に持ったファミコンやゲームボーイ、初めてのガラケー、プリクラを撮った時期といった小さく具体的なもののほうが、はるかに狭い年代にあなたを特定します。
+        </p>
+
+        <h2>もっと鋭く当てるコツ</h2>
+        <ul>
+          {tips.map((t) => <li>{t}</li>)}
+        </ul>
+
+        <h2>よくある質問</h2>
+        {faq.map((f) => (
+          <>
+            <p><strong>{f.q}</strong></p>
+            <p>{f.a}</p>
+          </>
+        ))}
+
+        <p>
+          さっそく試してみますか？ <a href="/ja/">「あなたの年齢を当てます」で遊ぶ</a>——無料、登録不要、数分で終わります。
+        </p>
+      </article>
+      <footer class="content-foot">
+        <nav>
+          {CONTENT_SLUGS.map((s) => (
+            <a href={pagePath('ja', s)}>{PAGES.ja[s].nav}</a>
+          ))}
+        </nav>
+      </footer>
+    </main>
+  </body>
+</html>

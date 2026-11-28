@@ -182,5 +182,14 @@
   </url>
   <url>
     <loc>https://iknowyourage.games/guide/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iknowyourage.games/guide/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://iknowyourage.games/ja/guide/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iknowyourage.games/guide/"/>
+  </url>
+  <url>
+    <loc>https://iknowyourage.games/ja/guide/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iknowyourage.games/guide/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://iknowyourage.games/ja/guide/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iknowyourage.games/guide/"/>
   </url>
 </urlset>
